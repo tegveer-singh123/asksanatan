@@ -39,7 +39,7 @@ python3 -m venv venv
 source venv/bin/activate          # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 cp .env.example .env                # Edit admin credentials if needed
-python run.py
+python3 run.py
 ```
 
 Open: **http://127.0.0.1:5001** (port 5001 avoids macOS AirPlay conflict on 5000)
