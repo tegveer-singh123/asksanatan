@@ -42,7 +42,7 @@ cp .env.example .env                # Edit admin credentials if needed
 python3 run.py
 ```
 
-Open: **http://127.0.0.1:5001** (port 5001 avoids macOS AirPlay conflict on 5000)
+Open: **http://127.0.0.1:5000
 
 ## Default Admin Login (from `.env`)
 
