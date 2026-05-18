@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block extra_css %}{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 admin-sidebar d-none d-md-block">
+            <a href="{{ url_for('admin.dashboard') }}" class="nav-link active"><i class="bi bi-speedometer2"></i> Dashboard</a>
+            <a href="{{ url_for('admin.products') }}" class="nav-link"><i class="bi bi-box"></i> Products</a>
+            <a href="{{ url_for('admin.categories') }}" class="nav-link"><i class="bi bi-tags"></i> Categories</a>
+            <a href="{{ url_for('admin.orders') }}" class="nav-link"><i class="bi bi-receipt"></i> Orders</a>
+            <a href="{{ url_for('admin.users') }}" class="nav-link"><i class="bi bi-people"></i> Users</a>
+            <a href="{{ url_for('main.home') }}" class="nav-link"><i class="bi bi-house"></i> View Site</a>
+        </nav>
+        <div class="col-md-10 p-4">
+            <h2 class="mb-4" style="color:#8b0000;">Admin Dashboard</h2>
+            <div class="row g-4 mb-4">
+                <div class="col-md-3"><div class="stat-card"><div class="stat-value">{{ total_users }}</div><div class="stat-label">Customers</div></div></div>
+                <div class="col-md-3"><div class="stat-card"><div class="stat-value">{{ total_products }}</div><div class="stat-label">Products</div></div></div>
+                <div class="col-md-3"><div class="stat-card"><div class="stat-value">{{ total_orders }}</div><div class="stat-label">Orders</div></div></div>
+                <div class="col-md-3"><div class="stat-card"><div class="stat-value">₹{{ "%.0f"|format(total_revenue) }}</div><div class="stat-label">Total Revenue</div></div></div>
+            </div>
+            <div class="row g-4 mb-4">
+                <div class="col-lg-8">
+                    <div class="auth-card"><h5>Monthly Sales</h5><canvas id="salesChart" height="120"></canvas></div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="auth-card"><h5>Order Status</h5><canvas id="statusChart"></canvas></div>
+                </div>
+            </div>
+            <div class="row g-4 mb-4">
+                <div class="col-lg-6">
+                    <div class="auth-card"><h5>Category Revenue</h5><canvas id="categoryChart" height="150"></canvas></div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="auth-card">
+                        <h5>Recent Orders</h5>
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead><tr><th>Order</th><th>Amount</th><th>Status</th></tr></thead>
+                                <tbody>
+                                    {% for o in recent_orders %}
+                                    <tr>
+                                        <td><a href="{{ url_for('admin.order_detail', order_number=o.order_number) }}">{{ o.order_number }}</a></td>
+                                        <td>₹{{ "%.2f"|format(o.total_amount) }}</td>
+                                        <td>{{ o.status }}</td>
+                                    </tr>
+                                    {% else %}
+                                    <tr><td colspan="3">No orders yet</td></tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+const analytics = {{ analytics | tojson }};
+document.addEventListener("DOMContentLoaded", function() { initAdminCharts(analytics); });
+</script>
+{% endblock %}

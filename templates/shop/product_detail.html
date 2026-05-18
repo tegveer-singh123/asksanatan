@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}{{ product.name }}{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('main.home') }}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ url_for('shop.products') }}">Products</a></li>
+                <li class="breadcrumb-item active">{{ product.name }}</li>
+            </ol>
+        </nav>
+        <div class="row g-5">
+            <div class="col-lg-6">
+                <img src="{{ product.image_url | img_src }}" alt="{{ product.name }}" class="product-detail-img">
+            </div>
+            <div class="col-lg-6">
+                {% if product.is_featured %}<span class="badge badge-featured mb-2">Featured</span>{% endif %}
+                {% if product.is_festival_kit %}<span class="badge badge-festival mb-2">Festival Kit</span>{% endif %}
+                <h2 style="color:#8b0000;">{{ product.name }}</h2>
+                <p class="text-muted">Category: {{ product.category.name }}</p>
+                <h3 class="product-price">₹{{ "%.2f"|format(product.price) }}</h3>
+                <p>{{ product.description }}</p>
+                <p><strong>Stock:</strong> {{ product.stock }} available</p>
+                {% if current_user.is_authenticated and not current_user.is_admin %}
+                <form action="{{ url_for('cart.add_to_cart', product_id=product.id) }}" method="POST" class="d-flex gap-2 align-items-center">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <input type="number" name="quantity" value="1" min="1" max="{{ product.stock }}" class="form-control qty-input" style="width:80px;">
+                    <button type="submit" class="btn btn-saffron"><i class="bi bi-cart-plus"></i> Add to Cart</button>
+                </form>
+                {% elif not current_user.is_authenticated %}
+                <a href="{{ url_for('auth.login') }}" class="btn btn-saffron">Login to Purchase</a>
+                {% endif %}
+            </div>
+        </div>
+        {% if related %}
+        <hr class="my-5">
+        <h4>Related Products</h4>
+        <div class="row g-4 mt-2">
+            {% for p in related %}
+            <div class="col-md-3">
+                <div class="product-card">
+                    <img src="{{ p.image_url | img_src }}" alt="{{ p.name }}" loading="lazy">
+                    <div class="card-body">
+                        <h6>{{ p.name }}</h6>
+                        <p class="product-price">₹{{ "%.2f"|format(p.price) }}</p>
+                        <a href="{{ url_for('shop.product_detail', slug=p.slug) }}" class="btn btn-sm btn-outline-saffron w-100">View</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

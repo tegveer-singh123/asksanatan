@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Contact{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="section-title"><h2>Contact Us</h2></div>
+        <div class="row g-5">
+            <div class="col-lg-5">
+                <div class="d-flex gap-3 mb-4">
+                    <div class="contact-icon"><i class="bi bi-envelope"></i></div>
+                    <div><h6>Email</h6><p class="mb-0">support@asksanatan.com</p></div>
+                </div>
+                <div class="d-flex gap-3 mb-4">
+                    <div class="contact-icon"><i class="bi bi-telephone"></i></div>
+                    <div><h6>Phone</h6><p class="mb-0">+91 98765 43210</p></div>
+                </div>
+                <div class="d-flex gap-3">
+                    <div class="contact-icon"><i class="bi bi-geo-alt"></i></div>
+                    <div><h6>Address</h6><p class="mb-0">Assi Ghat Road, Varanasi, UP 221005</p></div>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="auth-card">
+                    <form method="POST" novalidate>
+                        {{ form.hidden_tag() }}
+                        <div class="mb-3">
+                            {{ form.name.label(class="form-label") }}
+                            {{ form.name(class="form-control" + (" is-invalid" if form.name.errors else "")) }}
+                            {% for e in form.name.errors %}<div class="invalid-feedback">{{ e }}</div>{% endfor %}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.email.label(class="form-label") }}
+                            {{ form.email(class="form-control" + (" is-invalid" if form.email.errors else "")) }}
+                            {% for e in form.email.errors %}<div class="invalid-feedback">{{ e }}</div>{% endfor %}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.subject.label(class="form-label") }}
+                            {{ form.subject(class="form-control" + (" is-invalid" if form.subject.errors else "")) }}
+                            {% for e in form.subject.errors %}<div class="invalid-feedback">{{ e }}</div>{% endfor %}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.message.label(class="form-label") }}
+                            {{ form.message(class="form-control", rows=5) }}
+                            {% for e in form.message.errors %}<div class="invalid-feedback">{{ e }}</div>{% endfor %}
+                        </div>
+                        {{ form.submit(class="btn btn-saffron") }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

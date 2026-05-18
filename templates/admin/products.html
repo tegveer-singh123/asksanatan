@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Manage Products{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 admin-sidebar d-none d-md-block">
+            <a href="{{ url_for('admin.dashboard') }}" class="nav-link">Dashboard</a>
+            <a href="{{ url_for('admin.products') }}" class="nav-link active">Products</a>
+            <a href="{{ url_for('admin.categories') }}" class="nav-link">Categories</a>
+            <a href="{{ url_for('admin.orders') }}" class="nav-link">Orders</a>
+            <a href="{{ url_for('admin.users') }}" class="nav-link">Users</a>
+        </nav>
+        <div class="col-md-10 p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 style="color:#8b0000;">Products</h2>
+                <a href="{{ url_for('admin.add_product') }}" class="btn btn-saffron"><i class="bi bi-plus"></i> Add Product</a>
+            </div>
+            <div class="table-responsive bg-white rounded-4 shadow">
+                <table class="table table-hover mb-0">
+                    <thead class="table-asksanatan">
+                        <tr><th>Image</th><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Actions</th></tr>
+                    </thead>
+                    <tbody>
+                        {% for p in products %}
+                        <tr>
+                            <td><img src="{{ p.image_url | img_src }}" width="50" height="50" style="object-fit:cover;border-radius:8px;"></td>
+                            <td>{{ p.name }}</td>
+                            <td>{{ p.category.name }}</td>
+                            <td>₹{{ "%.2f"|format(p.price) }}</td>
+                            <td>{{ p.stock }}</td>
+                            <td>
+                                <a href="{{ url_for('admin.edit_product', product_id=p.id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                <form action="{{ url_for('admin.delete_product', product_id=p.id) }}" method="POST" class="d-inline">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                    <button class="btn btn-sm btn-danger" data-confirm="Delete this product?">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

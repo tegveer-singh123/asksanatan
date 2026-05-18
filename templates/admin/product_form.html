@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="auth-card">
+                <h3 style="color:#8b0000;">{{ title }}</h3>
+                <form method="POST" novalidate>
+                    {{ form.hidden_tag() }}
+                    <div class="mb-3">{{ form.name.label(class="form-label") }}{{ form.name(class="form-control") }}</div>
+                    <div class="mb-3">{{ form.description.label(class="form-label") }}{{ form.description(class="form-control", rows=4) }}</div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">{{ form.price.label(class="form-label") }}{{ form.price(class="form-control") }}</div>
+                        <div class="col-md-4 mb-3">{{ form.stock.label(class="form-label") }}{{ form.stock(class="form-control") }}</div>
+                        <div class="col-md-4 mb-3">{{ form.category_id.label(class="form-label") }}{{ form.category_id(class="form-select") }}</div>
+                    </div>
+                    <div class="mb-3">{{ form.image_url.label(class="form-label") }}{{ form.image_url(class="form-control", placeholder="https://images.unsplash.com/...") }}</div>
+                    <div class="mb-3 form-check">{{ form.is_featured(class="form-check-input") }}{{ form.is_featured.label(class="form-check-label") }}</div>
+                    <div class="mb-3 form-check">{{ form.is_festival_kit(class="form-check-input") }}{{ form.is_festival_kit.label(class="form-check-label") }}</div>
+                    {{ form.submit(class="btn btn-saffron") }}
+                    <a href="{{ url_for('admin.products') }}" class="btn btn-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

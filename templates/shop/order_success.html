@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Order Placed{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container text-center">
+        <div class="success-animation"><i class="bi bi-check-circle-fill"></i></div>
+        <h2 class="mt-3" style="color:#8b0000;">Order Placed Successfully!</h2>
+        <p class="lead">Thank you for shopping with AskSanatan.</p>
+        <div class="invoice-box text-start mx-auto" style="max-width:600px;">
+            <p><strong>Order Number:</strong> {{ order.order_number }}</p>
+            <p><strong>Total Amount:</strong> <span class="product-price">₹{{ "%.2f"|format(order.total_amount) }}</span></p>
+            <p><strong>Payment:</strong> {{ order.payment_method }}</p>
+            <p><strong>Status:</strong> {{ order.status }}</p>
+        </div>
+        <div class="mt-4">
+            <a href="{{ url_for('shop.order_detail', order_number=order.order_number) }}" class="btn btn-saffron me-2">View Invoice</a>
+            <a href="{{ url_for('shop.products') }}" class="btn btn-outline-saffron">Continue Shopping</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

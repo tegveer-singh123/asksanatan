@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}My Profile{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="list-group">
+                    <a href="{{ url_for('shop.dashboard') }}" class="list-group-item list-group-item-action">Dashboard</a>
+                    <a href="{{ url_for('auth.profile') }}" class="list-group-item list-group-item-action active">Profile</a>
+                    <a href="{{ url_for('shop.orders') }}" class="list-group-item list-group-item-action">My Orders</a>
+                    <a href="{{ url_for('cart.view_cart') }}" class="list-group-item list-group-item-action">Cart</a>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="auth-card">
+                    <h4 style="color:#8b0000;">Edit Profile</h4>
+                    <form method="POST" novalidate>
+                        {{ form.hidden_tag() }}
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                {{ form.name.label(class="form-label") }}
+                                {{ form.name(class="form-control") }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                {{ form.phone.label(class="form-label") }}
+                                {{ form.phone(class="form-control") }}
+                            </div>
+                            <div class="col-12 mb-3">
+                                {{ form.address.label(class="form-label") }}
+                                {{ form.address(class="form-control", rows=3) }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                {{ form.city.label(class="form-label") }}
+                                {{ form.city(class="form-control") }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                {{ form.pincode.label(class="form-label") }}
+                                {{ form.pincode(class="form-control") }}
+                            </div>
+                        </div>
+                        {{ form.submit(class="btn btn-saffron") }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

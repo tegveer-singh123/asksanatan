@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}About Us{% endblock %}
+{% block content %}
+<section class="about-hero text-center">
+    <div class="container">
+        <h1>About AskSanatan</h1>
+        <p class="lead">Connecting devotion with convenience since 2024</p>
+    </div>
+</section>
+<section class="py-5">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6">
+                <img src="{{ url_for('static', filename='images/products/ganesha-idol.jpg') }}" class="img-fluid rounded-4 shadow" alt="About AskSanatan">
+            </div>
+            <div class="col-lg-6">
+                <h2 class="text-maroon" style="color:#8b0000;">Our Mission</h2>
+                <p>AskSanatan is a BCA Major Project e-commerce platform dedicated to making authentic pooja samagri and spiritual services accessible to every household in India.</p>
+                <p>We source quality incense, brass idols, holy books, festival kits, and connect you with experienced priests for online and home pooja ceremonies.</p>
+                <ul class="list-unstyled">
+                    <li><i class="bi bi-check-circle text-warning"></i> 100% Authentic Products</li>
+                    <li><i class="bi bi-check-circle text-warning"></i> Pan-India Delivery</li>
+                    <li><i class="bi bi-check-circle text-warning"></i> Secure Payments (COD/UPI)</li>
+                    <li><i class="bi bi-check-circle text-warning"></i> Expert Priest Services</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

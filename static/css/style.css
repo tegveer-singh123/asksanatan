@@ -1,0 +1,446 @@
+/* AskSanatan - Spiritual Modern Theme */
+:root {
+  --saffron: #ff9933;
+  --saffron-dark: #e67e00;
+  --gold: #d4af37;
+  --gold-light: #f5e6a3;
+  --maroon: #8b0000;
+  --cream: #fff8f0;
+  --dark: #2c1810;
+  --text: #3d2914;
+  --shadow: 0 4px 20px rgba(139, 0, 0, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--cream);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+/* Navbar */
+.navbar-asksanatan {
+  background: linear-gradient(135deg, var(--maroon) 0%, #5c1010 50%, var(--dark) 100%);
+  box-shadow: var(--shadow);
+  padding: 0.6rem 0;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--gold) !important;
+  letter-spacing: 0.5px;
+}
+
+.navbar-brand span {
+  color: var(--saffron);
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--saffron) !important;
+}
+
+.btn-saffron {
+  background: linear-gradient(135deg, var(--saffron), var(--saffron-dark));
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 0.5rem 1.25rem;
+  border-radius: 50px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-saffron:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 153, 51, 0.4);
+  color: white;
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold), #b8960c);
+  border: none;
+  color: var(--dark);
+  font-weight: 600;
+  border-radius: 50px;
+}
+
+.btn-gold:hover {
+  color: var(--dark);
+  transform: translateY(-2px);
+}
+
+.btn-outline-saffron {
+  border: 2px solid var(--saffron);
+  color: var(--saffron);
+  border-radius: 50px;
+  font-weight: 600;
+}
+
+.btn-outline-saffron:hover {
+  background: var(--saffron);
+  color: white;
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, rgba(139, 0, 0, 0.85), rgba(44, 24, 16, 0.9)),
+    url("../images/hero-prayer.jpg") center/cover;
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: "ॐ";
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 15rem;
+  opacity: 0.08;
+  color: var(--gold);
+  animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.06; transform: translateY(-50%) scale(1); }
+  50% { opacity: 0.12; transform: translateY(-50%) scale(1.05); }
+}
+
+.hero-content h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.hero-content .highlight {
+  color: var(--saffron);
+}
+
+.hero-badge {
+  background: rgba(255, 153, 51, 0.2);
+  border: 1px solid var(--saffron);
+  color: var(--gold-light);
+  padding: 0.35rem 1rem;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  display: inline-block;
+  margin-bottom: 1rem;
+  animation: fadeInUp 0.8s ease;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Section titles */
+.section-title {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.section-title h2 {
+  color: var(--maroon);
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title h2::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--saffron), var(--gold));
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
+}
+
+/* Product Cards */
+.product-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s, box-shadow 0.3s;
+  height: 100%;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(139, 0, 0, 0.15);
+}
+
+.product-card img {
+  height: 220px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.product-card .card-body {
+  padding: 1.25rem;
+}
+
+.product-price {
+  color: var(--maroon);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.badge-featured {
+  background: var(--gold);
+  color: var(--dark);
+}
+
+.badge-festival {
+  background: var(--saffron);
+  color: white;
+}
+
+/* Footer */
+.footer-asksanatan {
+  background: linear-gradient(135deg, var(--dark), var(--maroon));
+  color: rgba(255, 255, 255, 0.85);
+  padding: 3rem 0 1rem;
+  margin-top: auto;
+}
+
+.footer-asksanatan a {
+  color: var(--gold-light);
+  text-decoration: none;
+}
+
+.footer-asksanatan a:hover {
+  color: var(--saffron);
+}
+
+/* Forms */
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--saffron);
+  box-shadow: 0 0 0 0.2rem rgba(255, 153, 51, 0.25);
+}
+
+.auth-card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  border-top: 4px solid var(--saffron);
+  padding: 2rem;
+}
+
+/* Dashboard */
+.stat-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--saffron);
+  transition: transform 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+}
+
+.stat-card .stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--maroon);
+}
+
+.stat-card .stat-label {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Cart & Checkout */
+.cart-item-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Invoice */
+.invoice-box {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  border: 2px solid var(--gold-light);
+}
+
+.invoice-header {
+  border-bottom: 3px solid var(--saffron);
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Toast container */
+.toast-container-custom {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  z-index: 9999;
+}
+
+/* Search bar */
+.search-bar {
+  border-radius: 50px;
+  border: 2px solid var(--gold-light);
+  padding-left: 1.25rem;
+}
+
+.search-bar:focus {
+  border-color: var(--saffron);
+}
+
+/* Category pills */
+.category-pill {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  background: white;
+  border: 2px solid var(--gold-light);
+  color: var(--text);
+  text-decoration: none;
+  margin: 0.25rem;
+  transition: all 0.2s;
+}
+
+.category-pill:hover,
+.category-pill.active {
+  background: var(--saffron);
+  border-color: var(--saffron);
+  color: white;
+}
+
+/* Admin sidebar */
+.admin-sidebar {
+  background: linear-gradient(180deg, var(--dark), var(--maroon));
+  min-height: calc(100vh - 56px);
+  padding: 1.5rem 0;
+}
+
+.admin-sidebar .nav-link {
+  color: rgba(255, 255, 255, 0.8) !important;
+  padding: 0.75rem 1.5rem;
+  border-left: 3px solid transparent;
+}
+
+.admin-sidebar .nav-link:hover,
+.admin-sidebar .nav-link.active {
+  background: rgba(255, 153, 51, 0.15);
+  border-left-color: var(--saffron);
+  color: var(--saffron) !important;
+}
+
+/* Product detail */
+.product-detail-img {
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  max-height: 450px;
+  object-fit: cover;
+  width: 100%;
+}
+
+/* About page */
+.about-hero {
+  background: linear-gradient(135deg, var(--maroon), var(--dark));
+  color: white;
+  padding: 4rem 0;
+}
+
+/* Contact */
+.contact-icon {
+  width: 50px;
+  height: 50px;
+  background: var(--gold-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--maroon);
+  font-size: 1.25rem;
+}
+
+/* Order success */
+.success-animation {
+  font-size: 5rem;
+  color: #28a745;
+  animation: scaleIn 0.5s ease;
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-section {
+    min-height: 70vh;
+    text-align: center;
+  }
+
+  .hero-section::before {
+    display: none;
+  }
+
+  .admin-sidebar {
+    min-height: auto;
+  }
+}
+
+/* Flash alerts styling */
+.alert {
+  border-radius: 12px;
+  border: none;
+}
+
+/* Table */
+.table-asksanatan thead {
+  background: var(--maroon);
+  color: white;
+}
+
+.table-asksanatan th {
+  font-weight: 600;
+}
+
+/* Loading spinner for images */
+img {
+  background: #f0e6d8;
+}

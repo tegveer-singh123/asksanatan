@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-7 hero-content">
+                <span class="hero-badge"><i class="bi bi-stars"></i> Authentic Spiritual Essentials</span>
+                <h1 class="hero-float">Welcome to <span class="highlight">AskSanatan</span></h1>
+                <p class="lead mb-4">Your one-stop platform for pooja samagri, festival kits, idols, and online spiritual services. Delivered with devotion across India.</p>
+                <a href="{{ url_for('shop.products') }}" class="btn btn-saffron btn-lg me-2">Shop Now</a>
+                <a href="{{ url_for('main.about') }}" class="btn btn-outline-light btn-lg">Learn More</a>
+            </div>
+           
+        </div>
+    </div>
+</section>
+
+<!-- Categories -->
+<section class="py-5">
+    <div class="container">
+        <div class="section-title"><h2>Shop by Category</h2></div>
+        <div class="text-center mb-4">
+            {% for cat in categories %}
+            <a href="{{ url_for('shop.products', category=cat.slug) }}" class="category-pill">{{ cat.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Featured Products -->
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="section-title"><h2>Featured Products</h2></div>
+        <div class="row g-4">
+            {% for product in featured %}
+            <div class="col-md-6 col-lg-3">
+                <div class="product-card">
+                    <img src="{{ product.image_url | img_src }}" alt="{{ product.name }}" loading="lazy">
+                    <div class="card-body">
+                        {% if product.is_featured %}<span class="badge badge-featured mb-2">Featured</span>{% endif %}
+                        <h6 class="card-title">{{ product.name }}</h6>
+                        <p class="product-price">₹{{ "%.2f"|format(product.price) }}</p>
+                        <a href="{{ url_for('shop.product_detail', slug=product.slug) }}" class="btn btn-outline-saffron btn-sm w-100">View Details</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Festival Kits -->
+<section class="py-5">
+    <div class="container">
+        <div class="section-title"><h2>Festival Pooja Kits</h2><p class="text-muted">Complete ready-made kits for every celebration</p></div>
+        <div class="row g-4">
+            {% for kit in festival_kits %}
+            <div class="col-md-6 col-lg-3">
+                <div class="product-card">
+                    <img src="{{ kit.image_url | img_src }}" alt="{{ kit.name }}" loading="lazy">
+                    <div class="card-body">
+                        <span class="badge badge-festival mb-2">Festival Kit</span>
+                        <h6>{{ kit.name }}</h6>
+                        <p class="product-price">₹{{ "%.2f"|format(kit.price) }}</p>
+                        <a href="{{ url_for('shop.product_detail', slug=kit.slug) }}" class="btn btn-saffron btn-sm w-100">Explore Kit</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-4">
+            <a href="{{ url_for('shop.products', category='festival-kits') }}" class="btn btn-gold">View All Festival Kits</a>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="py-5" style="background:linear-gradient(135deg,#8b0000,#2c1810);color:white;">
+    <div class="container text-center">
+        <h2>Book Online Pooja Services</h2>
+        <p class="lead mb-4">Experienced Vedic priests for Satyanarayan Katha, Griha Pravesh, and more.</p>
+        <a href="{{ url_for('shop.products', category='spiritual-services') }}" class="btn btn-saffron btn-lg">Book Now</a>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Checkout{% endblock %}
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <h2 class="mb-4" style="color:#8b0000;">Checkout</h2>
+        <div class="row g-4">
+            <div class="col-lg-7">
+                <div class="auth-card">
+                    <h5>Shipping Details</h5>
+                    <form method="POST" novalidate>
+                        {{ form.hidden_tag() }}
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                {{ form.shipping_name.label(class="form-label") }}
+                                {{ form.shipping_name(class="form-control") }}
+                                {% for e in form.shipping_name.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                {{ form.shipping_phone.label(class="form-label") }}
+                                {{ form.shipping_phone(class="form-control") }}
+                                {% for e in form.shipping_phone.errors %}<div class="text-danger small">{{ e }}</div>{% endfor %}
+                            </div>
+                            <div class="col-12 mb-3">
+                                {{ form.shipping_address.label(class="form-label") }}
+                                {{ form.shipping_address(class="form-control", rows=3) }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                {{ form.shipping_city.label(class="form-label") }}
+                                {{ form.shipping_city(class="form-control") }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                {{ form.shipping_pincode.label(class="form-label") }}
+                                {{ form.shipping_pincode(class="form-control") }}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                {{ form.payment_method.label(class="form-label") }}
+                                {{ form.payment_method(class="form-select") }}
+                            </div>
+                            <div class="col-12 mb-3">
+                                {{ form.notes.label(class="form-label") }}
+                                {{ form.notes(class="form-control", rows=2) }}
+                            </div>
+                        </div>
+                        {{ form.submit(class="btn btn-saffron btn-lg") }}
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="invoice-box">
+                    <h5>Order Summary</h5>
+                    <hr>
+                    {% for item in items %}
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>{{ item.product.name }} x{{ item.quantity }}</span>
+                        <span>₹{{ "%.2f"|format(item.product.price * item.quantity) }}</span>
+                    </div>
+                    {% endfor %}
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <strong>Total</strong>
+                        <strong class="product-price">₹{{ "%.2f"|format(total) }}</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
